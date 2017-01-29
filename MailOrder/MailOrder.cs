@@ -21,6 +21,7 @@ namespace MailOrder
 
         private void calculateSalesBonusButton_Click(object sender, EventArgs e)
         {
+            double id;
             if (string.IsNullOrEmpty(employeeNameTextBox.Text)
                 || string.IsNullOrEmpty(employeeIDTextbox.Text)
                     || string.IsNullOrEmpty(totalHoursWorkedTextBox.Text)
@@ -28,12 +29,16 @@ namespace MailOrder
             {
                 MessageBox.Show("No Field Can Remain Empty", "Empty Field Detected !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            else if ( double.Parse(totalHoursWorkedTextBox.Text) < 0 || double.Parse(totalHoursWorkedTextBox.Text) > 160 )
+            
+            else if (double.Parse(totalHoursWorkedTextBox.Text) < 0 || double.Parse(totalHoursWorkedTextBox.Text) > 160)
             {
-                MessageBox.Show("Total Working Hours Cannot be less than 0 and cannot exceed 160. It can neither be an Alphabet", "Total Working Hours Exceeded !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Total Working Hours Cannot be NEGATIVE and cannot exceed 160 HOURS. It can neither be an ALPHABET", "Please check TOTAL HOURS WORKED !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else 
+            else if (double.Parse(totalMonthlySalesTextBox.Text) < 0)
+            {
+                MessageBox.Show("Total Monthly Sales cannot be NEGATIVE !", "Please check MONTHLY SALES", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
             {
                 string employeeName = employeeNameTextBox.Text;
                 int employeeId = int.Parse(employeeIDTextbox.Text);
@@ -42,7 +47,7 @@ namespace MailOrder
 
                 double totalBonusAmount = (double.Parse(totalMonthlySalesTextBox.Text) * 0.02);
 
-                salesBonusTextBox.Text = ( (percentageOfHoursWorked * totalBonusAmount).ToString("C", CultureInfo.CurrentCulture) );
+                salesBonusTextBox.Text = ((percentageOfHoursWorked * totalBonusAmount).ToString("C", CultureInfo.CurrentCulture));
 
             }
             ///MessageBox.Show(employeeName + ' ' + employeeId + ' ' + salesBonusTextBox);
@@ -63,16 +68,69 @@ namespace MailOrder
 
         private void EnglishRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            var culture = CultureInfo.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            culture = CultureInfo.CurrentCulture;
+            EmployeeNameLabel.Text = "Employee Name : ";
+            EmployeeIDLabel.Text = "Employee ID : ";
+
+            HoursWorkedLabel.Text = "Total Hours Worked : ";
+            TotalSalesLabel.Text = "Total Monthly Sales : ";
+            SalesBonusLabel.Text = "Sales Bonus : ";
+
+            calculateSalesBonusButton.Text = "Calculate";
+            printSalesBonusButton.Text = "Print";
+            nextEntryButton.Text = "Next";
         }
 
         private void FrenchRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            var culture = CultureInfo.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
-            culture = CultureInfo.CurrentCulture;
+            EmployeeNameLabel.Text = "Le nom de l'employé";
+            EmployeeIDLabel.Text = "Employé id";
+
+            HoursWorkedLabel.Text = "Nombre total d'heures";
+            TotalSalesLabel.Text = "Ventes totales";
+            SalesBonusLabel.Text = "Bonus de vente";
+
+            calculateSalesBonusButton.Text = "Calculer";
+            printSalesBonusButton.Text = "Impression";
+            nextEntryButton.Text = "Prochain";
         }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            EmployeeNameLabel.Text = "Nombre de empleado";
+            EmployeeIDLabel.Text = "ID de empleado";
+
+            HoursWorkedLabel.Text = "Horas trabajadas";
+            TotalSalesLabel.Text = "Ventas totales";
+            SalesBonusLabel.Text = "Bono de ventas";
+
+            calculateSalesBonusButton.Text = "Calcular";
+            printSalesBonusButton.Text = "Impresión";
+            nextEntryButton.Text = "Siguiente";
+        }
+        private void employeeNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void employeeIDTextbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void totalHoursWorkedTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void totalMonthlySalesTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void salesBonusTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
