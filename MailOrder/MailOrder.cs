@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ Name : Rutul Shah
+ Student No : #200329341
+ Date Last Modified : 29th January
+ About Program : This program calculates sales bonus depending on total hours worked by employee and RUTUL MAIL ORDER's monthly sales. For convinience of the user, form is avalable in 3 different languages.  
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +28,7 @@ namespace MailOrder
 
         private void calculateSalesBonusButton_Click(object sender, EventArgs e)
         {
-            double id;
+            double _id;
             if (string.IsNullOrEmpty(employeeNameTextBox.Text)
                 || string.IsNullOrEmpty(employeeIDTextbox.Text)
                     || string.IsNullOrEmpty(totalHoursWorkedTextBox.Text)
@@ -30,9 +37,10 @@ namespace MailOrder
                 MessageBox.Show("No Field Can Remain Empty", "Empty Field Detected !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
-            else if (!double.TryParse(totalHoursWorkedTextBox.Text, out id))
+            /// Got information about TryParse() from msdn.microsoft.com  
+            else if (!double.TryParse(totalHoursWorkedTextBox.Text, out _id))
             {
+                ///my condition is satisfied and hence it will return true which means the input is a string
                 MessageBox.Show("TOTAL HOURS WORKED cannot be a string", "Please check TOTAL HOURS WORKED", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -41,8 +49,11 @@ namespace MailOrder
                 MessageBox.Show("Total Working Hours Cannot be NEGATIVE and cannot exceed 160 HOURS. It can neither be an ALPHABET", "Please check TOTAL HOURS WORKED !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            else if (!double.TryParse(totalMonthlySalesTextBox.Text, out id))
+            else if (!double.TryParse(totalMonthlySalesTextBox.Text, out _id))
             {
+                ///information about adding more arguments to show method is taken from msdn.microsoft.com
+       
+                ///my condition is satisfied and hence it will return true which means the input is a string
                 MessageBox.Show("TOTAL MONTHLY SALES cannot be a string", "Please check TOTAL MONTHLY SALES", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (double.Parse(totalMonthlySalesTextBox.Text) < 0)
@@ -51,17 +62,18 @@ namespace MailOrder
             }
             else
             {
-                string employeeName = employeeNameTextBox.Text;
-                int employeeId = int.Parse(employeeIDTextbox.Text);
+                string _employeeName = employeeNameTextBox.Text;
+                int _employeeId = int.Parse(employeeIDTextbox.Text);
 
-                double percentageOfHoursWorked = (double.Parse(totalHoursWorkedTextBox.Text) / 160);
+                double _percentageOfHoursWorked = (double.Parse(totalHoursWorkedTextBox.Text) / 160);
 
-                double totalBonusAmount = (double.Parse(totalMonthlySalesTextBox.Text) * 0.02);
+                double _totalBonusAmount = (double.Parse(totalMonthlySalesTextBox.Text) * 0.02);
 
-                double value = double.Parse(totalMonthlySalesTextBox.Text);
-                totalMonthlySalesTextBox.Text = value.ToString("C", CultureInfo.CurrentCulture);
+                ///the arguments which is passed in ToString(), is taken from msdn.microsoft.com
+                double _value = double.Parse(totalMonthlySalesTextBox.Text);
+                totalMonthlySalesTextBox.Text = _value.ToString("C", CultureInfo.CurrentCulture);
 
-                salesBonusTextBox.Text = ((percentageOfHoursWorked * totalBonusAmount).ToString("C", CultureInfo.CurrentCulture));
+                salesBonusTextBox.Text = ((_percentageOfHoursWorked * _totalBonusAmount).ToString("C", CultureInfo.CurrentCulture));
 
             }
             ///MessageBox.Show(employeeName + ' ' + employeeId + ' ' + salesBonusTextBox);
