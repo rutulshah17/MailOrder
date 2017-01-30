@@ -29,11 +29,18 @@ namespace MailOrder
             {
                 MessageBox.Show("No Field Can Remain Empty", "Empty Field Detected !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
+
+            else if (!double.TryParse(totalHoursWorkedTextBox.Text, out id))
+            {
+                MessageBox.Show("TOTAL HOURS WORKED cannot be a string", "Please check TOTAL HOURS WORKED", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             else if (double.Parse(totalHoursWorkedTextBox.Text) < 0 || double.Parse(totalHoursWorkedTextBox.Text) > 160)
             {
                 MessageBox.Show("Total Working Hours Cannot be NEGATIVE and cannot exceed 160 HOURS. It can neither be an ALPHABET", "Please check TOTAL HOURS WORKED !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             else if (double.Parse(totalMonthlySalesTextBox.Text) < 0)
             {
                 MessageBox.Show("Total Monthly Sales cannot be NEGATIVE !", "Please check MONTHLY SALES", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -46,6 +53,9 @@ namespace MailOrder
                 double percentageOfHoursWorked = (double.Parse(totalHoursWorkedTextBox.Text) / 160);
 
                 double totalBonusAmount = (double.Parse(totalMonthlySalesTextBox.Text) * 0.02);
+
+                double value = double.Parse(totalMonthlySalesTextBox.Text);
+                totalMonthlySalesTextBox.Text = value.ToString("C", CultureInfo.CurrentCulture);
 
                 salesBonusTextBox.Text = ((percentageOfHoursWorked * totalBonusAmount).ToString("C", CultureInfo.CurrentCulture));
 
