@@ -41,6 +41,10 @@ namespace MailOrder
                 MessageBox.Show("Total Working Hours Cannot be NEGATIVE and cannot exceed 160 HOURS. It can neither be an ALPHABET", "Please check TOTAL HOURS WORKED !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            else if (!double.TryParse(totalMonthlySalesTextBox.Text, out id))
+            {
+                MessageBox.Show("TOTAL MONTHLY SALES cannot be a string", "Please check TOTAL MONTHLY SALES", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else if (double.Parse(totalMonthlySalesTextBox.Text) < 0)
             {
                 MessageBox.Show("Total Monthly Sales cannot be NEGATIVE !", "Please check MONTHLY SALES", MessageBoxButtons.OK, MessageBoxIcon.Error);
